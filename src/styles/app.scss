@@ -1,0 +1,32 @@
+html, body {
+  height: 100%;
+  background: #f2f2f2;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ref-loading {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.van-swipe-cell__left {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  background: #f44;
+}
+.van-swipe-cell__right {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  background: #f44;
+}

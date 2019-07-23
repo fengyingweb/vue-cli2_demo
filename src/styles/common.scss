@@ -1,0 +1,130 @@
+@import "./vars.less";
+@import "./mixins/text-emphasis.scss";
+@import "./mixins/background-variant.scss";
+
+/*============  start: 滚动条 ===========*/
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+/* 滚动条两端的按钮 */
+::-webkit-scrollbar-button {
+  display: none;
+
+}
+/* 外层轨道 */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #f1f1f1;
+}
+/* 滚动的滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #cdcdcd;
+}
+/* 边角 */
+::-webkit-scrollbar-corner {
+  display: none;
+}
+/* 右下角拖动块 */
+::-webkit-resizer {
+  display: none;
+}
+/*============  end: 滚动条 ===========*/
+
+/*============ start 浮动 ============*/
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+/*============ end 浮动 ============*/
+
+/*============  start: 浮动 ===========*/
+/*清除浮动开始*/
+.clearfix:before,.clearfix:after {
+  content: "";
+  display: block;
+  width: 100%;
+  clear: both;
+  zoom: 1;
+}
+.clearfix {
+  zoom: 1;
+}
+/*============  end: 浮动 ===========*/
+
+
+/*============  start: 辅助类样式 ===========*/
+small,
+.small {
+  font-size: floor((100% * $font-size-small / $font-size-base));
+}
+
+mark,
+.mark {
+  background-color: $color-warning;
+  padding: .2em;
+}
+
+// 对齐方式
+.text-left           { text-align: left; }
+.text-right          { text-align: right; }
+.text-center         { text-align: center; }
+.text-justify        { text-align: justify; }
+.text-nowrap         { white-space: nowrap; }
+
+// 转换
+.text-lowercase      { text-transform: lowercase; }
+.text-uppercase      { text-transform: uppercase; }
+.text-capitalize     { text-transform: capitalize; }
+
+// 前景色
+.text-muted {
+  color: $color-muted;
+}
+.text-primary {
+  @include text-emphasis-variant($color-primary);
+}
+.text-success {
+  @include text-emphasis-variant($color-success);
+}
+.text-info {
+  @include text-emphasis-variant($color-info);
+}
+.text-warning {
+  @include text-emphasis-variant($color-warning);
+}
+.text-danger {
+  @include text-emphasis-variant($color-danger);
+}
+
+// 背景色
+.bg-primary {
+  color: #fff;
+  @include bg-variant($color-primary);
+}
+.bg-success {
+  @include bg-variant($color-success);
+}
+.bg-info {
+  @include bg-variant($color-info);
+}
+.bg-warning {
+  @include bg-variant($color-warning);
+}
+.bg-danger {
+  @include bg-variant($color-danger);
+}
+/*============  end: 辅助类样式 ===========*/
+
+/*切换路由页面过渡效果*/
+.fadePage-enter, .fadePage-leave-to {
+  opacity: 0
+}
+.fadePage-enter-active, .fadePage-leave-active {
+  transition: opacity .3s;
+}
