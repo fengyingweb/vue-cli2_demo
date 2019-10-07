@@ -10,7 +10,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const env = require('../config/prod.env')
+const env = require('../config/sit.env')
 
 const htmlFiles = require('./build-pages').htmlFiles
 
@@ -47,21 +47,21 @@ getHtmlPlugins()
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
-      sourceMap: config.build.productionSourceMap,
+      sourceMap: config.buildSit.productionSourceMap,
       extract: true,
       usePostCSS: true
     })
   },
-  devtool: config.build.productionSourceMap ? config.build.devtool : false,
+  devtool: config.buildSit.productionSourceMap ? config.buildSit.devtool : false,
   output: {
-    path: config.build.assetsRoot,
+    path: config.buildSit.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
     // 设置全局变量
     new webpack.ProvidePlugin({
-      '$envType': path.resolve(__dirname, '../config/prod.env.js'),
+      '$envType': path.resolve(__dirname, '../config/sit.env.js'),
       '$baseConfig': path.resolve(__dirname, '../config/baseUrlConfig.js')
     }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -71,13 +71,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
-          drop_console: true, // 生产打包时去掉console.log
+          drop_console: false, // 生产打包时去掉console.log
           drop_debugger: true,
-          warnings: false,
-          pure_funcs: ['console.log'] //移除console
+          warnings: false
         }
       },
-      sourceMap: config.build.productionSourceMap,
+      sourceMap: config.buildSit.productionSourceMap,
       parallel: true
     }),
     // extract css into its own file
@@ -92,7 +91,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({
-      cssProcessorOptions: config.build.productionSourceMap
+      cssProcessorOptions: config.buildSit.productionSourceMap
         ? { safe: true, map: { inline: false } }
         : { safe: true }
     }),
@@ -134,14 +133,14 @@ const webpackConfig = merge(baseWebpackConfig, {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
-        to: config.build.assetsSubDirectory,
+        to: config.buildSit.assetsSubDirectory,
         ignore: ['.*']
       }
     ])
   ].concat(htmlPlugins)
 })
 
-if (config.build.productionGzip) {
+if (config.buildSit.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
@@ -150,7 +149,7 @@ if (config.build.productionGzip) {
       algorithm: 'gzip',
       test: new RegExp(
         '\\.(' +
-        config.build.productionGzipExtensions.join('|') +
+        config.buildSit.productionGzipExtensions.join('|') +
         ')$'
       ),
       threshold: 10240,
@@ -159,7 +158,7 @@ if (config.build.productionGzip) {
   )
 }
 
-if (config.build.bundleAnalyzerReport) {
+if (config.buildSit.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }

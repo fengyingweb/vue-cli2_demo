@@ -9,7 +9,7 @@ import {Toast} from 'vant'
 // 创建axios实例
 const service = axios.create({
   timeout: 15000, // 请求超时时间
-  withCredentials: true,
+  withCredentials: true, // 允许携带cookie
   headers: {'Pragma': 'no-cache', 'Cache-Control': 'no-cache', 'Content-Type': 'application/json'}
 })
 // console.log(window.location.hash);

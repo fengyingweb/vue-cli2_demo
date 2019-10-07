@@ -67,6 +67,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    // 设置全局变量
+    new webpack.ProvidePlugin({
+      '$envType': path.resolve(__dirname, '../config/dev.env.js'),
+      '$baseConfig': path.resolve(__dirname, '../config/baseUrlConfig.js')
+    }),
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
