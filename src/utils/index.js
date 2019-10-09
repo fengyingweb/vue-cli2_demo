@@ -160,3 +160,7 @@ export function param2Obj (url) {
       '"}'
   )
 }
+
+export function isDef (value) {
+  return value !== null && value !== undefined
+}

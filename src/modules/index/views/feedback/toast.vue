@@ -62,7 +62,7 @@ export default {
 
     handleToast2 () {
       this.$toast.loading({
-        mask: true,
+        mask: false,
         message: '加载中...'
       })
     },

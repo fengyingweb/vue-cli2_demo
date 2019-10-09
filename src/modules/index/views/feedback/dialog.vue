@@ -7,9 +7,9 @@
       <div class="main-item">
         <h5 class="title5">基础用法</h5>
         <div class="box">
-          <van-button type="primary" plain @click="show1 = true">消息提示</van-button>
-          <van-button type="primary" plain @click="show2 = true">不带标题</van-button>
-          <van-button type="primary" plain @click="show3 = true">带取消按钮</van-button>
+          <van-button type="primary" plain @click="handleShow1">消息提示</van-button>
+          <van-button type="primary" plain @click="handleShow2">不带标题</van-button>
+          <van-button type="primary" plain @click="handleShow3">带取消按钮</van-button>
         </div>
       </div>
 
@@ -21,20 +21,20 @@
       </div>
     </div>
 
-    <van-dialog v-model="show1" title="标题" :message="message"></van-dialog>
+    <fy-dialog v-model="show1" title="标题" :message="message"></fy-dialog>
 
-    <van-dialog v-model="show2" :message="message"></van-dialog>
+    <fy-dialog v-model="show2" :message="message"></fy-dialog>
 
-    <van-dialog
+    <fy-dialog
       v-model="show3"
       title="标题"
       show-cancel-button
       :message="message"
       @confirm="handleConfirm"
       @cancel="handleCancel">
-    </van-dialog>
+    </fy-dialog>
 
-    <van-dialog
+    <fy-dialog
       v-model="show4"
       title="登录"
       show-cancel-button
@@ -42,7 +42,7 @@
       >
       <van-field v-model="userName" label="用户名: " placeholder="请输入用户名..." required />
       <van-field v-model="password" type="password" label="密码: " placeholder="请输入密码..." required />
-    </van-dialog>
+    </fy-dialog>
   </div>
 </template>
 
@@ -90,6 +90,34 @@ export default {
       } else {
         done()
       }
+    },
+
+    handleShow1 () {
+      this.$dialog.alert({
+        title: '标题',
+        message: '弹窗内容'
+      }).then(()=> {
+        console.log('confirm')
+      })
+    },
+
+    handleShow2 () {
+      this.$dialog.alert({
+        message: '弹窗内容'
+      }).then(()=> {
+        console.log('confirm')
+      })
+    },
+
+    handleShow3 () {
+      this.$dialog.confirm({
+        title: '标题',
+        message: '弹窗内容'
+      }).then(()=> {
+        console.log('confirm')
+      }).catch(()=> {
+        console.log('cancel')
+      })
     }
   },
 
