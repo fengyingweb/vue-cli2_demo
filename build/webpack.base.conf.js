@@ -3,6 +3,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const buildEntrys = require('./build-entrys')
+const HappyPack = require('happypack') // 多核
 
 console.log(`
   正在非常拼命的打包中...
@@ -45,13 +46,12 @@ module.exports = {
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig,
+        use: 'happypack/loader?id=vue',
         exclude: /node_modules/
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: 'happypack/loader?id=js',
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
@@ -80,6 +80,21 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new HappyPack({
+      id: 'js',
+      loaders: ['babel-loader']
+    }),
+    new HappyPack({
+      id: 'vue',
+      loaders: [
+        {
+          loader: 'vue-loader',
+          options: vueLoaderConfig
+        }
+      ]
+    })
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
