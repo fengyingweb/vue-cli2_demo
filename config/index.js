@@ -66,7 +66,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false, // 打包生产时不要把源码暴露出去
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
