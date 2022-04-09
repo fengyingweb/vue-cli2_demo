@@ -20,7 +20,7 @@
     "jsonwebtoken": "^8.5.0",
     "lodash": "^4.17.11",
     "mockjs": "^1.0.1-beta3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "nprogress": "^0.2.0",
     "vant": "^1.6.10",
     "vue": "^2.5.2",
